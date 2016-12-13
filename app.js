@@ -28,7 +28,7 @@ Piece.prototype.location = '';
 // Initial array population
 function initArray(){
   new Piece('Duke', dukeFrontMovesX, arrOfZero, arrOfZero, dukeBackMovesY, 'white');
-  objArrayWhite[0].location='3,0';
+  objArrayWhite[0].location='0,3';
   new Piece('Duke', dukeFrontMovesX, arrOfZero, arrOfZero, dukeBackMovesY, 'white');
   objArrayWhite[1].location='3,1';
   new Piece('Duke', dukeFrontMovesX, arrOfZero, arrOfZero, dukeBackMovesY, 'white');
@@ -91,16 +91,38 @@ function renderUnits(){
         if(objArrayWhite[k].location === idString){
           var temp = document.getElementById(objArrayWhite[k].location);
           temp.textContent = objArrayWhite[k].name;
-          console.log(idString + 't his is from white array');
         }
         if(objArrayBlack[k].location === idString){
           temp = document.getElementById(objArrayBlack[k].location);
           temp.textContent = objArrayBlack[k].name;
-          console.log(idString + ' this is from black array');
         }
       }
     }
   }
+}
+// Handle table click
+function handleTableClick(event){
+  event.preventDefault();
+  var place = document.getElementById(event.target.id);
+  console.log(event.target.id)
+  console.log(place.textContent)
+  if(place.textContent === ''){
+    return alert('Please click on a piece');
+  }
+  var xCord = prompt('Please enter new X coordinate.(bottom left is 0,0)');
+  var yCord = prompt('Please enter new Y coordinate.');
+  var newLoc = xCord + ',' + yCord;
+  console.log(newLoc);
+  for(var i = 0; i < objArrayWhite.length; i++){
+    if(objArrayWhite[i].location === event.target.id){
+      objArrayWhite[i].location = newLoc;
+    }
+    if(objArrayBlack[i].location === event.target.id){
+      objArrayBlack[i].location = newLoc;
+    }
+  }
+  renderTable();
+  renderUnits();
 }
 
 
@@ -114,3 +136,4 @@ function renderUnits(){
 initArray();
 renderTable();
 renderUnits();
+tablePlace.addEventListener('click', handleTableClick);
