@@ -5,8 +5,8 @@ var objArrayWhite = [];
 var objArrayBlack = [];
 var tablePlace = document.getElementById('table');
 var arrOfZero = [0,0,0,0,0,0,0,0,0,0,0,0];
-var dukeFrontMovesX = [1, 2, 3, 4, 5, 0 - 1, 0 - 2, 0 - 3, 0 - 4, 0 - 5];
-var dukeBackMovesY = [1, 2, 3, 4, 5, 0 - 1, 0 - 2, 0 - 3, 0 - 4, 0 - 5];
+var dukeFrontMovesX = [1, 2, 3, 4, 5, -1, -2, -3, -4, -5];
+var dukeBackMovesY = [1, 2, 3, 4, 5, -1, -2, -3, -4, -5];
 function Piece(name, frontMovesX, frontMovesY, backMovesX, backMovesY, color){
   this.name = name;
   this.frontMovesX = frontMovesX;
@@ -103,13 +103,16 @@ function renderUnits(){
 function handleTableClick(event){
   event.preventDefault();
   var place = document.getElementById(event.target.id);
-  console.log(event.target.id)
-  console.log(place.textContent)
+  console.log(event.target.id);
+  console.log(place.textContent);
   if(place.textContent === ''){
     return alert('Please click on a piece');
   }
-  var xCord = prompt('Please enter new X coordinate.(bottom left is 0,0)');
-  var yCord = prompt('Please enter new Y coordinate.');
+  var xCord = parseInt(prompt('Please enter new X coordinate.(bottom left is 0,0)'));
+  var yCord = parseInt(prompt('Please enter new Y coordinate.'));
+  if(isNaN(xCord) || isNaN(yCord) || xCord > 5 || yCord > 5 || yCord < 0 || xCord < 0){
+    return alert('Please enter a number between 0 and 5.');
+  }
   var newLoc = xCord + ',' + yCord;
   console.log(newLoc);
   for(var i = 0; i < objArrayWhite.length; i++){
