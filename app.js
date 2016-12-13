@@ -22,7 +22,6 @@ function Piece(name, frontMovesX, frontMovesY, backMovesX, backMovesY, color){
 }
 
 Piece.prototype.frontSide = true;
-Piece.prototype.backSide = false;
 Piece.prototype.location = '';
 // function definitions
 // Initial array population
